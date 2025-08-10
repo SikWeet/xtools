@@ -15,7 +15,7 @@ class Cache:
 		"""
 		self.__ttl = ttl
 		self.__max_size = max_size
-		self.__cache = OrderedDict()  # Для сохранения порядка добавления элементов
+		self.__cache = OrderedDict()
 
 	def _clear_expired(self):
 		"""
@@ -32,7 +32,7 @@ class Cache:
 		Checks if the maximum cache size has been exceeded and deletes old items if necessary.
 		"""
 		if len(self.__cache) > self.__max_size:
-			self.__cache.popitem(last=False)  # Удаляет первый элемент (самый старый)
+			self.__cache.popitem(last=False)
 
 	def set(self, key: str, value: any):
 		"""

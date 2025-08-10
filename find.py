@@ -65,3 +65,19 @@ class Find:
 			elif _type is str:
 				result.update(dict(max_len=Find.__get_max_len(lst)))
 		return result
+
+	@staticmethod
+	def by_key_value(data: dict, key: str, value: str | int):
+		"""Search for all elements in the dictionary list where dict[key] == value"""
+		results = [item for item in data if isinstance(item, dict) and item.get(key) == value]
+		return results
+
+	@staticmethod
+	def contains(data: dict, key: str, substring: str):
+		"""Search all elements of the dictionary list where substring is contained in dict[key] (case insensitive)"""
+		substring = str(substring).lower()
+		results = [
+			item for item in data 
+			if isinstance(item, dict) and key in item and substring in str(item[key]).lower()
+		]
+		return results

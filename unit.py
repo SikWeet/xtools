@@ -62,3 +62,21 @@ class UnitConverter:
 		:return: The mass in grams.
 		"""
 		return kilograms * 1000
+	
+	@staticmethod
+	def kmh_to_ms(kmh: float) -> float:
+		"""
+		Converts speed from kilometers per hour to meters per second.
+		
+		Formula: m/s = km/h ÷ 3.6
+		"""
+		return kmh / 3.6
+
+	@staticmethod
+	def ms_to_kmh(ms: float) -> float:
+		"""
+		Converts speed from meters per second to kilometers per hour.
+		
+		Formula: km/h = m/s × 3.6
+		"""
+		return ms * 3.6
