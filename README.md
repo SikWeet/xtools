@@ -25,6 +25,7 @@ pip install xtools-py
 - **Шифрование** (`Encryption`) — базовые функции шифрования и хеширования.
 - **Работа с текстом** (`TextUtils`) — удобные текстовые манипуляции.
 - **Конвертация единиц измерения** (`Unit`) — перевод величин между разными системами.
+- **Облачное хранилище** (`AWS S3`) — удобное взаимодействие с облачным хранилищем (асинхронно/синхронно).
 
 ## 📖 Использование
 
@@ -48,6 +49,18 @@ result = Find.get_max(data)  # banana
 
 numbers = [123, 321, 213]
 result = Find.get_max(numbers) # 321
+
+# Работа с словарём:
+
+data = [
+    {"name": "Alice", "age": 25},
+    {"name": "Bob", "age": 30},
+    {"name": "Charlie", "age": 25}
+]
+
+results = Find.by_key_value(data, "age", 25) # [{'name': 'Alice', 'age': 25}, {'name': 'Charlie', 'age': 25}]
+
+results = Find.contains(data, "name", "Al") # [{'name': 'Alice', 'age': 25}]
 ```
 
 ### 3. Работа с кешем
@@ -101,10 +114,35 @@ print(encrypted)
 print(decrypted)  # Hello, World!
 ```
 
+### 8. Работа с AWS S3 (синхронно)
+```python
+from xtools.storage import S3Storage
+
+s3 = S3Storage("my-bucket", "ACCESS_KEY", "SECRET_KEY")
+
+# Загрузка файла
+s3.upload_file("local.txt", "remote.txt")
+
+# Список файлов
+print(s3.list_files())
+```
+
+### 9. Работа с AWS S3 (асинхронно)
+```python
+import asyncio
+from xtools.storage import AsyncS3Storage
+
+async def main():
+    s3 = AsyncS3Storage("my-bucket", "ACCESS_KEY", "SECRET_KEY")
+    await s3.upload_file("local.txt", "remote.txt")
+    print(await s3.list_files())
+
+asyncio.run(main())
+```
+
 ## 💡 Roadmap
 
 - Добавление поддержки **Redis** для кеша
-- Добавление поддержки **S3 Storage** для логирования
 - Расширенные возможности валидации
 - Улучшенные математические функции
 
@@ -124,3 +162,4 @@ print(decrypted)  # Hello, World!
 ---
 
 📌 **XTools-py** — инструменты, которые делают разработку проще! 🚀
+
